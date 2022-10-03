@@ -1,0 +1,66 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: feature/style_tools
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/eosc-synergy/saps-scheduler:
+      branch: develop
+      repo: https://github.com/eosc-synergy/saps-scheduler
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/eosc-synergy/saps-scheduler git:
+        commands:
+        - /usr/bin/env sh .sqa/script.droopy-xanthic-quoll.sh
+        container: qc.acc_tasty-cobalt-rottweiler
+  QC.Doc:
+    repos:
+      github.com/eosc-synergy/saps-scheduler find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.ready-peach-crane.sh
+        container: qc.doc_zippy-silver-wolfhound
+      github.com/eosc-synergy/saps-scheduler git:
+        commands:
+        - /usr/bin/env sh .sqa/script.beady-ivory-cuttlefish.sh
+        container: qc.doc_hasty-plum-dodo
+      github.com/eosc-synergy/saps-scheduler markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.crappy-aquamarine-burmese.sh
+        container: qc.doc_homey-vermilion-toad
+  QC.Lic:
+    repos:
+      github.com/eosc-synergy/saps-scheduler licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.chewy-turquoise-raccoon.sh
+        container: qc.lic_squeaky-mustard-hare
+  QC.Sec:
+    repos:
+      github.com/eosc-synergy/saps-scheduler bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.scummy-violet-toad.sh
+        container: qc.sec_blurry-amethyst-hare
+  QC.Sty:
+    repos:
+      github.com/eosc-synergy/saps-scheduler flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.baggy-sapphire-bullfrog.sh
+        container: qc.sty_grumpy-amaranth-greyhound
+      github.com/eosc-synergy/saps-scheduler pycodestyle:
+        commands:
+        - /usr/bin/env sh .sqa/script.thirsty-puce-mau.sh
+        container: qc.sty_wheezy-firebrick-mule
+      github.com/eosc-synergy/saps-scheduler pylint:
+        commands:
+        - /usr/bin/env sh .sqa/script.stealthy-brown-frise.sh
+        container: qc.sty_wheezy-asparagus-drever
+  QC.Ver:
+    repos:
+      github.com/eosc-synergy/saps-scheduler get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.snazzy-flax-terrier.sh
+        container: qc.ver_skimpy-asparagus-audemer
+timeout: 1800
